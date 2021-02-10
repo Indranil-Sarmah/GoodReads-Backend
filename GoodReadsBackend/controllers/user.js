@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const { errorHandler } = require("../helpers/dbErrorHandler");
 
 exports.signup = (req, res) => {
     
@@ -7,11 +8,11 @@ exports.signup = (req, res) => {
     user.save((err, user) => {  // save the newly user created
         if (err) {
             return res.status(400).json({ //if there is an error
-                error
+                error: errorHandler(err)// display a friendly error message in the errorHandler
             });
         }
         res.json({
-            user
+            user        //if no error return the user in the response
         });
     });
 };
