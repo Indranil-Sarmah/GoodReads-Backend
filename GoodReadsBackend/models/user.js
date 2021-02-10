@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const crypto = require("crypto");//core node.js module to encrypt the password
-const uuidv1 = require("uuid/v1");//unique strings for userId 
+const { v4: uuidv4 } = require('uuid');//unique strings for userId 
+
+
 
 //to create a schema in mongoDB
 const userSchema = new mongoose.Schema(
@@ -43,7 +45,7 @@ userSchema
     .virtual("password")
     .set(function(password) {
         this._password = password;
-        this.salt = uuidv1();
+        this.salt = uuidv4();
         this.hashed_password = this.encryptPassword(password);
     })
     .get(function() {
@@ -68,3 +70,5 @@ userSchema.methods = {
 
 //finally exporting the schema by creating the model using model method of mongoose
 module.exports = mongoose.model("User", userSchema);
+
+//body-parser : is used to parse the data coming from client side and req object

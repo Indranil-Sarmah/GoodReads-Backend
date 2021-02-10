@@ -9,9 +9,12 @@
   "author": "Indranil Sarmah",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.11.15",
+    "mongoose": "^5.2.8",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.7",
     "uuid": "^8.3.2"
   }
