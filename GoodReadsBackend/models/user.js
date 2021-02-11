@@ -54,6 +54,12 @@ userSchema
 
     // add methods in mongoose to perform some action
 userSchema.methods = {
+
+    //this function will first encrypt the plain password from the client side and then it will match with the hashed password already entered during the signup method
+    authenticate: function(plainText) {
+        return this.encryptPassword(plainText) === this.hashed_password;
+    },
+
     encryptPassword: function(password) {
         if (!password) return "";
         try {
