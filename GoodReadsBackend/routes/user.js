@@ -1,12 +1,16 @@
 const express = require("express");
 const router = express.Router();
 
+const { requireSignin,isAuth,isAdmin } = require("../controllers/auth");
+const { userById } = require("../controllers/user");
 
-const { signin,signup,signout,requireSignin } = require("../controllers/user");
-const { userSignupValidator } = require("../validator");
+//this method will fetch the userID from the URL if it contains usedID Routes-- from this userID we can particularly show the details of the user as per our requirement
+router.get("/secret/:userId", requireSignin,isAuth,isAdmin, (req, res) => {
+    res.json({
+        user: req.profile
+    });
+});
 
-router.post("/signup",userSignupValidator, signup);
-router.post("/signin", signin);
-router.get("/signout", signout);
+router.param("userId", userById);
 
 module.exports = router;

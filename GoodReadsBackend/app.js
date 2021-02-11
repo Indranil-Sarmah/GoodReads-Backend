@@ -6,6 +6,8 @@ const cookieParser = require("cookie-parser");
 const expressValidator = require("express-validator"); //to validate the user input if there is any missing feilds, then this package will help to display a friendly error message
 const app = express();
 require("dotenv").config();
+
+const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 
 const URL = process.env.MONGO_URI;
@@ -25,6 +27,7 @@ app.use(expressValidator());//validating the form feilds
 
 
 // routes middleware
+app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 
 const port = process.env.PORT || 8000;
