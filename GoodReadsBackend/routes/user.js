@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 
-const { signin,signup,signout } = require("../controllers/user");
+const { signin,signup,signout,requireSignin } = require("../controllers/user");
 const { userSignupValidator } = require("../validator");
 
 router.post("/signup",userSignupValidator, signup);

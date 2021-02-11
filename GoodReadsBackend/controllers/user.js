@@ -55,3 +55,11 @@ exports.signout = (req, res) => {
     res.clearCookie("t"); //just clear the cookie of signed in user 
     res.json({ message: "Signout success" }); //display a sucessful signout message
 };
+
+//protect any routes we can use this require signin method
+//if any user try to access protected routes then they will get unauthorized access error
+exports.requireSignin = expressJwt({
+    secret: process.env.JWT_SECRET,
+    algorithms:["HS256"],
+    userProperty: "auth"
+});
