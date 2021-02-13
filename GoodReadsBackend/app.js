@@ -10,6 +10,7 @@ require("dotenv").config();
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 const categoryRoutes = require("./routes/category");
+const productRoutes = require("./routes/product");
 
 const URL = process.env.MONGO_URI;
 mongoose.connect(URL,{ useNewUrlParser: true }).then(()=>
@@ -31,6 +32,7 @@ app.use(expressValidator());//validating the form feilds
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 app.use("/api", categoryRoutes);
+app.use("/api", productRoutes);
 
 const port = process.env.PORT || 8000;
 
