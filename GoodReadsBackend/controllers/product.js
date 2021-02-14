@@ -4,6 +4,24 @@ const fs = require("fs");
 const Product = require("../models/product");
 const { errorHandler } = require("../helpers/dbErrorHandler");
 
+exports.productById = (req, res, next, id) => {
+    Product.findById(id).exec((err, product) => {
+        if (err || !product) {
+            return res.status(400).json({
+                error: "Product not found"
+            });
+        }
+        req.product = product;
+        next();
+    });
+};
+
+//this method will return details about single product
+exports.read = (req, res) => {
+    req.product.photo = undefined; //later there will separate routes for image upload 
+    return res.json(req.product);
+};
+
 exports.create = (req, res) => {
     let form = new formidable.IncomingForm();
     form.keepExtensions = true;
@@ -59,6 +77,20 @@ exports.create = (req, res) => {
             //     });
             // }
             res.json(result);
+        });
+    });
+};
+
+exports.remove = (req, res) => {
+    let product = req.product;
+    product.remove((err, deletedProduct) => {
+        if (err) {
+            return res.status(400).json({
+                error: errorHandler(err)
+            });
+        }
+        res.json({
+            message: "Product deleted successfully"
         });
     });
 };
