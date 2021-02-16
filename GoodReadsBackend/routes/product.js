@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { create, productById, read,remove,update } = require("../controllers/product");
+const { create, productById, read,remove,update,list } = require("../controllers/product");
 const { requireSignin, isAuth, isAdmin } = require("../controllers/auth");
 const { userById } = require("../controllers/user");
 
@@ -22,6 +22,8 @@ router.put(
     isAdmin,
     update
 );
+
+router.get("/products", list);//list all the products according to sold,newarival
 
 
 //whenever there is a id in the routes there the methods will run
