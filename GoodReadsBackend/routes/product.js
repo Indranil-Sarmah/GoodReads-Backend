@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { create, productById, read,remove,update,list,listRelated,listCategories } = require("../controllers/product");
+const { create, productById, read,remove,update,list,listRelated,listCategories,listBySearch,photo } = require("../controllers/product");
 const { requireSignin, isAuth, isAdmin } = require("../controllers/auth");
 const { userById } = require("../controllers/user");
 
@@ -25,7 +25,10 @@ router.put(
 
 router.get("/products", list);//list all the products according to sold,newarival
 router.get("/products/related/:productId", listRelated);//to display related products
-router.get("/products/categories", listCategories);//ti list product categories
+router.get("/products/categories", listCategories);//list product categories
+router.post("/products/by/search", listBySearch);
+router.get("/product/photo/:productId", photo); //can be used as middleware
+// router.post("/products/by/search", listBySearch);//search products
 
 
 //whenever there is a id in the routes there the methods will run
