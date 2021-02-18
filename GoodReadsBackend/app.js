@@ -11,6 +11,7 @@ const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 const categoryRoutes = require("./routes/category");
 const productRoutes = require("./routes/product");
+const cors = require('cors');
 
 
 const URL = process.env.MONGO_URI;
@@ -27,6 +28,7 @@ app.use(morgan("dev"));//we can see the response we are getting from the server
 app.use(bodyParser.json());
 app.use(cookieParser()); //for saving user credentials in the cookie
 app.use(expressValidator());//validating the form feilds
+app.use(cors());//to remove crossorigin error ,its a miiddle ware
 
 
 // routes middleware
