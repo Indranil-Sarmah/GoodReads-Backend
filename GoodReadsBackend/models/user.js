@@ -2,8 +2,6 @@ const mongoose = require("mongoose");
 const crypto = require("crypto");//core node.js module to encrypt the password
 const { v4: uuidv4 } = require('uuid');//unique strings for userId 
 
-
-
 //to create a schema in mongoDB
 const userSchema = new mongoose.Schema(
     {
